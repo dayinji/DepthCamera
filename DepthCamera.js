@@ -5,6 +5,7 @@
 		this.cameraMoveFunction = null;
 		this.startTime = Date.now();
 		this.startPos = [0, 0];
+		this.currentPos = [0, 0];
 		this.targetPos = [0, 0];
 		this.duration = -1;
 		this.callback = new Array();
@@ -28,27 +29,22 @@
 						break;
 					case this.MoveType.EASE:
 						factorResult = AnimCurve.ease(factor);
-						console.log("EASE!!!!!!!!!");
 						break;
 					case this.MoveType.ELASTIC:
 						factorResult = AnimCurve.elastic(factor);
-						console.log("ELASTIC!!!!!!!!!");
 						break;
 					case this.MoveType.SWING:
 						factorResult = AnimCurve.swing(factor);
-						console.log("SWING!!!!!!!!!");
 						break;
 					case this.MoveType.BOUNCE:
 						factorResult = AnimCurve.bounce(factor);
-						console.log("BOUNCE!!!!!!!!!");
 						break;
 					default:
-						factorResult = AnimCurve.linear(factor);
+						factorResult = AnimCurve.ease(factor);
 						break;
 				}
 				var x = this.startPos[0] + (this.targetPos[0] - this.startPos[0])*factorResult;
 				var y = this.startPos[1] + (this.targetPos[1] - this.startPos[1])*factorResult;
-				console.log("" + factor + "       " + factorResult);
 				location = [x, y];
 			}
 			this.updatePos(location);
@@ -57,12 +53,12 @@
 			// 时间结束且存在回调，执行回调
 			if (this.callback.length != 0){
 				this.reset();
-				console.log("callback" + this.callback[0]);
 				(this.callback.shift())();
 			}
 		}
 	};
 	DepthCamera.prototype.updatePos = function(pos) {
+		this.currentPos = pos;
 		// 更新各layer属性
 		for (var i = 0 ; i < this.layers.length ; i++) {
 			var layer = this.layers[i];
@@ -86,12 +82,14 @@
 		// 存在回调，执行回调
 		this.reset();
 		if (this.callback.length != 0){
-			console.log("callback" + this.callback[0]);
 			(this.callback.shift())();
 		}
 		return this;
 	};
-	DepthCamera.prototype.moveTo = function(target, duration, type = this.MoveType.LINEAR, callback = null) {
+	DepthCamera.prototype.moveTo = function(target, duration, type, callback) {
+		arguments[1] = arguments[1] ? arguments[1] : 1000;
+		arguments[2] = arguments[2] ? arguments[2] : this.MoveType.EASE;
+		arguments[3] = arguments[3] ? arguments[3] : null;
 		if (this.isRunning()) {
 			var camera = this;
 			this.callback.push(function() {camera.moveTo(target, duration, type, callback);});
@@ -103,11 +101,12 @@
 		this.type = type;
 		if (callback != null)
 			this.callback.push(callback);
-		console.log("MoveTo" + this.duration);
 		this.update();
 		return this;
 	};
-	DepthCamera.prototype.exec = function(f, duration, callback = null) {
+	DepthCamera.prototype.exec = function(f, duration, callback) {
+		arguments[1] = arguments[1] ? arguments[1] : 1000;
+		arguments[2] = arguments[2] ? arguments[2] : null;
 		if (this.isRunning()) {
 			var camera = this;
 			this.callback.push(function() {camera.exec(f, duration, callback);});
@@ -121,8 +120,28 @@
 		this.update();
 		return this;
 	};
-	DepthCamera.prototype.cancel = function() {
-		this.cameraMoveFunction = null;
+	DepthCamera.prototype.pause = function(duration, callback) {
+		arguments[0] = arguments[0] ? arguments[0] : 1000;
+		arguments[1] = arguments[1] ? arguments[1] : null;
+		if (this.isRunning()) {
+			var camera = this;
+			this.callback.push(function() {camera.pause(duration, callback);});
+			return this;
+		}
+		this.startTime = Date.now();
+		this.duration = duration;
+		if (callback != null)
+			this.callback.push(callback);
+		this.update();
+		return this;
+	};
+	DepthCamera.prototype.stop = function() {
+		this.reset();
+		if (this.callback.length != 0) {
+			this.callback.splice(0, this.callback.length);
+		}
+		//this.update();
+		return this;
 	};
 	DepthCamera.prototype.MoveType = {
 		"LINEAR": 0,
@@ -135,7 +154,8 @@
 		this.cameraMoveFunction = null;
 		this.startTime = Date.now();
 		// 重置初始位和目标位一致
-		this.startPos = this.targetPos;
+		this.startPos = this.currentPos;
+		this.targetPos = this.currentPos;
 		this.duration = -1;
 		this.type = this.MoveType.LINEAR;
 	};
