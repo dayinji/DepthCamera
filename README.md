@@ -38,8 +38,9 @@ DepthCamera support Chained calls as follow:
 | :-------- |
 | set([x, y])  |
 | moveTo([x, y], duration = 1000, type = this.MoveType.EASE, callback = null)     | 
-| pause(duration = 1000, callback = null)      | 
 | exec(f, duration = 1000, callback = null)      | 
+| pause(duration = 1000, callback = null)      | 
+| stop()      | 
 | isRunning()      |
  
 | DepthCamera.MoveType      |
