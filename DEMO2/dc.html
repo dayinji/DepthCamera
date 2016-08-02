@@ -46,9 +46,20 @@
         ball.style.backgroundColor = Math.random() > 0.5 ? "rgba(96, 234, 255," + ((num-20)/40) + ")" :  "rgba(255, 120, 120," + ((num-20)/40) + ")" ;
         return ball;
     }
+    var currentPos=[0, 0];
+    var targetPos=[0, 0];
+    function mouseMove(ev) { 
+		var Ev = ev || window.event; 
+		targetPos = [(Ev.clientX - document.body.clientWidth/2)/4, (Ev.clientY - document.body.clientHeight/2)/4];
+	} 
+	document.onmousemove = mouseMove; 
 
     function cameraMove(t) {
-        return [15*Math.sin(t/200.0), 15*Math.cos(t/200.0)];
+    	var x = currentPos[0] + (targetPos[0]-currentPos[0])*0.03;
+    	var y = currentPos[1] + (targetPos[1]-currentPos[1])*0.03;
+    	currentPos = [x, y];
+    	console.log(currentPos);
+        return currentPos;
     }
     var p = new DepthCamera();
     p.exec(cameraMove, p.INFINITE);
