@@ -52,7 +52,13 @@
 		var Ev = ev || window.event; 
 		targetPos = [(Ev.clientX - document.body.clientWidth/2)/4, (Ev.clientY - document.body.clientHeight/2)/4];
 	} 
+    function touchMove(e) {
+        e.preventDefault();
+        var touches = e.changedTouches;
+        targetPos = [(touches[0].pageX - document.body.clientWidth/2)/4, (touches[0].pageY - document.body.clientHeight/2)/4];
+    }
 	document.onmousemove = mouseMove; 
+    document.addEventListener("touchmove", touchMove, false);
 
     function cameraMove(t) {
     	var x = currentPos[0] + (targetPos[0]-currentPos[0])*0.03;
