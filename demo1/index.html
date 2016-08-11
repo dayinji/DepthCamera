@@ -51,7 +51,9 @@
         return [Math.sin(t/1000.0*2*Math.PI), Math.cos(t/1000.0*2*Math.PI)];
     }
     function cameraMove(t) {
-        if (t < 2000) {
+        if (t < 1000) {
+            return [0, 20];
+        } else if (t < 3000) {
             return [0, (1-ease(t/2000.0))*20];
         }
         return [0, 0];
