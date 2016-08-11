@@ -1,0 +1,303 @@
+
+/* @author:jessezheng;
+ * @date:2015/07/27;
+ * @content:qixi
+*/
+@charset "utf-8";
+@import "reset.import.css";
+html {
+  font-size: 100px;
+  height: 100%;
+}
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url(img/bg2@2x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+.mountain1 {
+    width: 476px;
+    min-width: 110%;
+    height: 248px;
+    background-image: url(img/mountain1@2x.png);
+    background-size: cover;
+    position: absolute;
+    left: 50%;
+    margin-left: -238px;
+    bottom: -35px;
+}
+.mountain2 {
+    width: 184px;
+    height: 136px;
+    background-image: url(img/mountain2@2x.png);
+    background-size: cover;
+    position: absolute;
+    bottom: 121px;
+    right: -25px;
+}
+.mountain3 {
+    width: 78px;
+    height: 111px;
+    background-image: url(img/mountain3@2x.png);
+    background-size: cover;
+    position: absolute;
+    top: 200px;
+    left: -5px;
+}
+.mountain4 {
+    width: 78px;
+    height: 111px;
+    background-image: url(img/mountain3@2x.png);
+    background-size: cover;
+    position: absolute;
+    top: 60px;
+    left: 50px;
+}
+.cloud1 {
+    width: 219px;
+    height: 136px;
+    background-image: url(img/cloud1@2x.png);
+    background-size: cover;
+    position: absolute;
+    bottom: 140px;
+    left: -20px;
+}
+.cloud2 {
+    width: 266px;
+    height: 144px;
+    background-image: url(img/cloud2@2x.png);
+    background-size: cover;
+    position: absolute;
+    top: 150px;
+    right: -150px;
+}
+.cloud3 {
+    width: 172px;
+    height: 100px;
+    background-image: url(img/cloud3@2x.png);
+    background-size: cover;
+    position: absolute;
+    top: 150px;
+    left: -30px;
+}
+.cloud4 {
+    width: 189px;
+    height: 102px;
+    background-image: url(img/cloud4@2x.png);
+    background-size: cover;
+    position: absolute;
+    top: 30px;
+    right: -10px
+}
+.month {
+  width: 1.43rem;
+  height: 1.43rem;
+  background-image: url(img/month@2x.png);
+  background-size: cover;
+  position: absolute;
+  top: 10px;
+  right: 20px
+}
+.night {
+  position: absolute;
+  width: 650px;
+  height: 400px;
+  top: -50px;
+  left: -50px;
+  top: 0;
+}
+
+/* LOGO */
+.qzone-logo {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 64px;
+  height: 18px;
+  background-image: url(img/qzone-logo@2x.png);
+  background-size: cover;
+  text-indent: -9999px;
+}
+
+/* 头部 */
+.act-header {
+  text-indent: -9999px;
+}
+.act-title {
+  width: 2.81rem;
+  height: 2.69rem;
+  background-image: url(img/title@2x.png);
+  background-size: 2.81rem 2.69rem;
+  margin: 0 auto;
+  margin-top: 1.1rem;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.act-slogan {
+  display: none;
+}
+
+
+/* 按钮 */
+.bt {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: block;
+  width: 2.28rem;
+  height: 0.44rem;
+  background-image: url(img/bt@2x.png);
+  background-size: 2.28rem 0.44rem;
+}
+.bt:active {
+  background-image: url(img/bt-press@2x.png);
+}
+
+/*人数信息*/
+.yuyue-info {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.yuyue-info p{
+  font-size: 0.14rem;
+  color: #7f71c5;
+  text-align: center;
+}
+.yuyue-info span{
+  font-size: 0.14rem;
+  color: #7d4eaf;
+  text-align: center;
+  display: inline-block;
+  margin:  0 0.05rem;
+}
+
+/* 广告位 */
+.advertise-wrap {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0.6rem;
+  background-image: url(img/advertice-bg@2x.png);
+  background-size: 100% 60px;
+}
+.advertise-label {
+  position: absolute;
+  bottom: 0.1rem;
+  left: 0.1rem;
+  color: #9d8cff;
+  font-size: 14px;
+}
+.advertise-title {
+  background-image: url(img/advertise-title@2x.png);
+  background-size: cover;
+  width: 2.16rem;
+  height: 0.55rem;
+  margin: 0.02rem 0 0 0.5rem;
+}
+.advertise-bt {
+  background-image: url(img/advertise-bt@2x.png);
+  background-size: cover;
+  width: 0.83rem;
+  height: 0.31rem;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.15rem;
+}
+
+/* 弹框 */
+.dialog-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.act-dialog {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 2.87rem;
+  height: 3.74rem;
+  background-image: url(img/dialog-bg@2x.png);
+  background-size: cover;
+  border-radius: 0.1rem;
+}
+.bt-close {
+  width: 0.21rem;
+  height: 0.21rem;
+  background-image: url(img/close@2x.png);
+  background-size: cover;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+}
+.dialog-title {
+  width: 1.62rem;
+  height: 0.38rem;
+  background-image: url(img/succeed@2x.png);
+  background-size: cover;
+  margin: 0 auto;
+  margin-top: 0.8rem;
+  text-indent: -9999px;
+}
+.dialog-content {
+  color:#8983e1;
+  width: 80%;
+  font-size: 14px;
+  margin: 20px 10%;
+  line-height: 1.5;
+}
+.bt-friend {
+  display: block;
+  margin:0 auto;
+  width: 2.13rem;
+  height: 0.44rem;
+  background-image: url(img/friend-bt@2x.png);
+  background-size: cover;
+  margin-top: 0.2rem;
+}
+.bt-friend:active {
+  background-image: url(img/friend-bt-press@2x.png);
+}
+.bt-share {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #8983e1;
+  text-decoration : underline;
+}
+
+/*@media screen and (min-width: 414px)  {
+  html {
+    font-size: 110px;
+  }
+}*/
+@media screen and (min-width: 476px)  {
+  .mountain1 {
+      left: -5% !important;
+      margin-left: 0 !important;
+  }
+}
+@media screen and (max-width: 374px)  {
+  html {
+    font-size: 85px;
+  }
+  body {
+    padding-top: 0.1rem;
+    box-sizing: border-box;
+  }
+}

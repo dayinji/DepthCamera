@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>七夕告白季 | 上空间直播，做最潮告白</title>
+    <meta name="keywords" content="QQ空间,黄钻空间装扮,黄钻特权,开通黄钻,黄钻活动,QQ空间活动,QQ空间交友,QQ空间明星,豪华版黄钻,年费黄钻,游戏特权,生活特权,基础特权,黄钻回馈" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--QQ分享使用-->
+    <meta itemprop="name" content="七夕告白季"/>
+    <meta itemprop="description" name="description"  content="七夕告白季 | 上空间直播，做最潮告白"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="qzone-logo">QQ空间</div>
+        <div class="act-header">
+            <canvas class="night layer4" width="650" height="400"></canvas>
+            <div class="mountain4 layer5"></div>
+            <div class="cloud4 cloud layer2"></div>
+            <div class="cloud3 cloud layer2"></div>
+            <div class="mountain3 layer3"></div>
+            <div class="cloud2 cloud layer2"></div>
+            <div class="cloud1 cloud layer2"></div>
+            <div class="mountain2 layer2"></div>
+            <div class="mountain1 layer1"></div>
+            <div class="month layer5"></div>
+            <h1 class="act-title">直播遇到爱</h1>
+            <h2 class="act-slogan">七夕告白，让千万网友见证爱</h2>
+        </div>
+        <button class="bt"></button>
+        <div class="yuyue-info">
+            <p>已有<span>212545415</span>人预约</p>
+        </div>
+    </div>
+    <script src="night.js"></script>
+    <script>
+    var layer1 = document.getElementsByClassName("layer1");
+    var layer2 = document.getElementsByClassName("layer2");
+    var layer3 = document.getElementsByClassName("layer3");
+    var layer4 = document.getElementsByClassName("layer4");
+    var layer5 = document.getElementsByClassName("layer5");
+    var layer_static = document.getElementsByClassName("layer_static");
+    var layers = [layer1, layer2, layer3, layer4, layer5, layer_static];
+    var depth = [1, 2, 3, 4, 5, 99999];
+    var cameraAmp = 8;
+    var cameraFrep = 0.3;
+    var timeInMs = Date.now();
+    function ease(t) { return 1-(--t)*t*t*t; }
+    function cloudMove(t) {
+        return [Math.sin(t/1000.0*2*Math.PI), Math.cos(t/1000.0*2*Math.PI)];
+    }
+    function cameraMove(t) {
+        if (t < 2000) {
+            return [0, (1-ease(t/2000.0))*20];
+        }
+        return [0, 0];
+    }
+    function cloudMove(t) {
+        return [Math.sin(t/1000.0*2*Math.PI), Math.cos(t/1000.0*2*Math.PI)];
+    }
+    function setVendor(element, property, value) {
+        element.style["webkit" + property] = value;
+        /*element.style["moz" + property] = value;
+        element.style["ms" + property] = value;
+        element.style["o" + property] = value;*/
+        element.style[property] = value;
+    }
+    var c = document.getElementsByClassName("night")[0];
+    var cxt = c.getContext("2d");
+    var n = new night(50, 650, 180, cxt);
+    
+    function anim() {
+        for (var i = 0 ; i < layers.length ; i++) {
+            for (var j = 0 ; j < layers[i].length ; j++) {
+                var t = (Date.now()-timeInMs)*cameraFrep;
+                var move = cameraMove(t);
+                var cloudmove = cloudMove(t);
+                if (hasClass(layers[i][j], "cloud")) {
+                    setVendor(layers[i][j], "transform", "translate3d(" + 1/depth[i]*cameraAmp*(move[0]+cloudmove[0]) +"px, " + 1/depth[i]*cameraAmp*(move[1]+cloudmove[1]) + "px, 0)")
+                }
+                else
+                    setVendor(layers[i][j], "transform", "translate3d(" + 1/depth[i]*cameraAmp*move[0] +"px, " + 1/depth[i]*cameraAmp*move[1] + "px, 0)");
+            }
+        }
+        n.update();
+      requestAnimationFrame(anim);
+    }
+    function hasClass(obj, cls){
+        var obj_class = obj.className;
+        var obj_class_lst = obj_class.split(/\s+/);
+        var x = 0;
+        for(x in obj_class_lst) {
+            if(obj_class_lst[x] == cls) {
+                return true;
+            }
+        }
+        return false;
+    }
+    requestAnimationFrame(anim);
+
+    function hasClass(obj, cls) {
+        var reg = new RegExp('(^|\\s+)' + cls + '($|\\s+)');
+        return reg.test(obj.className);
+    }
+
+</script>
+</body>
+</html>
