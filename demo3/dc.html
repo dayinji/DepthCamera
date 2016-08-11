@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DepthCamera | DEMO</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #222222;
+        }
+        #wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .ball {
+            border-radius: 50%;
+            position: absolute;
+            /*box-shadow:0px 0px 6px #60eaff;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+    </div>
+    <script src="../DepthCamera.min.js"></script>
+    <script>
+    var wrapper = document.getElementById("wrapper");
+    var width = document.body.clientWidth;
+    var height = document.body.clientHeight;
+    for (var i = 0 ; i < 200 ; i++) {
+        var ball = getBall(Math.random()*40+20);
+        wrapper.appendChild(ball);
+    }
+    function getBall(num) {
+        var ball = document.createElement("div");
+        ball.className = "layer ball";
+        ball.setAttribute("depth", ""+(60 - num)/15);
+        var r = Math.round(Math.random()*20+20);
+        ball.style.width = "" + num + "px";
+        ball.style.height = "" + num + "px";
+        ball.style.top = "" + (Math.random()*height-20) + "px";
+        ball.style.left = "" + (Math.random()*width-20) + "px";
+        ball.style.backgroundColor = Math.random() > 0.5 ? "rgba(96, 234, 255," + ((num-20)/40) + ")" :  "rgba(255, 120, 120," + ((num-20)/40) + ")" ;
+        return ball;
+    }
+    var currentPos=[0, 0];
+    var targetPos=[0, 0];
+    function mouseMove(ev) { 
+		var Ev = ev || window.event; 
+		targetPos = [(Ev.clientX - document.body.clientWidth/2)/4, (Ev.clientY - document.body.clientHeight/2)/4];
+	} 
+	document.onmousemove = mouseMove; 
+
+    function cameraMove(t) {
+    	var x = currentPos[0] + (targetPos[0]-currentPos[0])*0.03;
+    	var y = currentPos[1] + (targetPos[1]-currentPos[1])*0.03;
+    	currentPos = [x, y];
+    	console.log(currentPos);
+        return currentPos;
+    }
+    var p = new DepthCamera();
+    p.exec(cameraMove, p.INFINITE);
+    
+
+</script>
+</body>
+</html>
