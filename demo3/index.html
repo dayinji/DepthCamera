@@ -7,6 +7,8 @@
         html, body {
             height: 100%;
             width: 100%;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
             background-color: #222222;
         }
@@ -30,7 +32,7 @@
     var wrapper = document.getElementById("wrapper");
     var width = document.body.clientWidth;
     var height = document.body.clientHeight;
-    for (var i = 0 ; i < 200 ; i++) {
+    for (var i = 0 ; i < 100 ; i++) {
         var ball = getBall(Math.random()*40+20);
         wrapper.appendChild(ball);
     }
